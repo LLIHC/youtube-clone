@@ -1,0 +1,9 @@
+.mypy_cache
+.pytest_cache
+.ipynb_checkpoints
+__pycache__
+
+*.ipynb
+*.*g
+*.gif
+*.csv
