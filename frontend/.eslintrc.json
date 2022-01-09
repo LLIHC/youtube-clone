@@ -1,0 +1,20 @@
+{
+    "env": {
+      "browser": true
+    },
+    "extends": ["plugin:react/recommended", "airbnb-typescript"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 11,
+      "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "import"],
+    "rules": {
+      "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["draft"] }],
+      "@typescript-eslint/no-unused-vars": "warn"
+    }
+  }
