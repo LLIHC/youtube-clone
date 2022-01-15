@@ -1,20 +1,39 @@
 {
-    "env": {
-      "browser": true
+  "env": {
+    "browser": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb-typescript"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": ["plugin:react/recommended", "airbnb-typescript"],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": "./tsconfig.json",
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 11,
-      "sourceType": "module"
-    },
-    "plugins": ["react", "@typescript-eslint", "import"],
-    "rules": {
-      "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["draft"] }],
-      "@typescript-eslint/no-unused-vars": "warn"
-    }
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "rules": {
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["draft"] }],
+    "@typescript-eslint/no-unused-vars": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   }
+}
