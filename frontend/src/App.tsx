@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/header';
+import Home from './page/home';
 
 const Root = styled('div')({
   display: 'flex',
@@ -17,7 +18,7 @@ export default function App() {
     <Root>
       <Header />
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Root>
   );

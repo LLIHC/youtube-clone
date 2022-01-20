@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selectorFamily } from 'recoil';
 
 export interface ISampleVideosType {
   id: string;  // video hashid
@@ -242,7 +242,35 @@ const sampleVideos: ISampleVideosType[] = [
   },
 ];
 
+const sampleVideoIds: string[] = sampleVideos.map(video => video.id);
+
+const nullVideo: ISampleVideosType = {
+  id: 'null',
+  uploader: 'null',
+  views: 0,
+  title: 'null',
+  description: 'null',
+};
+
+
 export const sampleVideosAtom = atom<ISampleVideosType[]>({
-  key: 'samples',
+  key: 'sampleVideosAtom',
   default: sampleVideos,
+});
+
+export const sampleVideoIdsAtom = atom<string[]>({
+  key: 'sampleVideoIdsAtom',
+  default: sampleVideoIds,
+});
+
+
+export const sampleVideoById = selectorFamily({
+  key: 'sampleVideosById',
+  get: (id: string) => ({ get }) => {
+    const foundVideo = get(sampleVideosAtom).find(video => video.id === id);
+    if (foundVideo) {
+      return foundVideo;
+    }
+    return nullVideo;
+  },
 });
