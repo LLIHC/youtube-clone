@@ -16,6 +16,7 @@
   "rules": {
     "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["draft"] }],
     "@typescript-eslint/no-unused-vars": "warn",
+    "comma-dangle": [2, "always-multiline"],
     "import/order": [
       "error",
       {
@@ -35,5 +36,10 @@
         }
       }
     ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
