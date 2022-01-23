@@ -9,6 +9,6 @@ python3 -m venv ${root}/venv
 source  ${root}/venv/bin/activate
 
 pip install --upgrade pip
-pip install -r ${root}/requirements.txt
+pip install -r ${root}/backend/requirements.txt
 
 pre-commit install
