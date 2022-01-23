@@ -10,3 +10,10 @@ repos:
     hooks:
       - id: black
         name: Format code
+
+  - repo: local 
+    hooks: 
+      - id: lint
+        name: Format frontend
+        entry: cd frontend && yarn lint
+        language: system
