@@ -2,6 +2,7 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
+import { InputBase } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -20,6 +21,22 @@ const StyledAppBar = styled(AppBar)({
 
 const StyledToolbar = styled(Toolbar)({
   height: '100%',
+});
+
+const StyledBox = styled(Box)({
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+});
+
+const StyledInputBase = styled(InputBase)({
+  width: '89%',
+  height: '33px',
+  padding: '0 10px',
+  color: '#000',
+  border: '1px solid #BEBEBE',
+  borderRadius: '2px 0 0 2px',
+  zIndex: 2,
 });
 
 export default function Header() {
