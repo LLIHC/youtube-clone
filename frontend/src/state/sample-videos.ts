@@ -247,7 +247,7 @@ const sampleVideoIds: string[] = sampleVideos.map(video => video.id);
 const nullVideo: ISampleVideosType = {
   id: 'null',
   uploader: 'null',
-  views: 0,
+  views: -1,
   title: 'null',
   description: 'null',
 };

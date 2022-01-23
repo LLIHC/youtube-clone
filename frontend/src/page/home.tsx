@@ -16,10 +16,10 @@ interface StyledGridProps {
 const StyledGrid = styled(Grid)({
   position: 'relative',
   marginBottom: '40px',
-}, (props: StyledGridProps) => ({
-  marginLeft: `calc(${props.imargin}vw/2)`,
-  marginRight: `calc(${props.imargin}vw/2)`,
-  width: `calc(${props.nrow}/2 + ${props.imargin} - 0.01px)`,
+}, ({ nrow, imargin }: StyledGridProps) => ({
+  marginLeft: `calc(${imargin}vw/2)`,
+  marginRight: `calc(${imargin}vw/2)`,
+  width: `calc(${nrow}/2 + ${imargin} - 0.01px)`,
 }));
 
 export default function Home() {
