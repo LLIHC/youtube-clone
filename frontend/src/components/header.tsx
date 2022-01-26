@@ -2,6 +2,8 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -22,6 +24,23 @@ const StyledToolbar = styled(Toolbar)({
   height: '100%',
 });
 
+const SearchBox = styled(Box)({
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap',
+});
+
+const SearchInputBase = styled(InputBase)({
+  width: '89%',
+  height: '33px',
+  padding: '0 10px',
+  color: '#000',
+  border: '1px solid #BEBEBE',
+  borderRadius: '2px 0 0 2px',
+  zIndex: 2,
+});
+
+
 export default function Header() {
   return (
     <StyledAppBar>
@@ -34,6 +53,10 @@ export default function Header() {
             Youtube
           </Typography>
         </Box>
+        <SearchBox>
+          <SearchInputBase placeholder="Search" />
+          <Button variant="outlined" startIcon={<SearchIcon />} />
+        </SearchBox>
         <Button color="inherit" sx={{ padding: '0px' }}>
           Login
         </Button>
