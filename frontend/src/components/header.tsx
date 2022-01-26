@@ -24,13 +24,13 @@ const StyledToolbar = styled(Toolbar)({
   height: '100%',
 });
 
-const StyledBox = styled(Box)({
+const SearchBox = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'nowrap',
 });
 
-const StyledInputBase = styled(InputBase)({
+const SearchInputBase = styled(InputBase)({
   width: '89%',
   height: '33px',
   padding: '0 10px',
@@ -53,10 +53,10 @@ export default function Header() {
             Youtube
           </Typography>
         </Box>
-        <StyledBox>
-          <StyledInputBase placeholder="Search" />
+        <SearchBox>
+          <SearchInputBase placeholder="Search" />
           <Button variant="outlined" startIcon={<SearchIcon />} />
-        </StyledBox>
+        </SearchBox>
         <Button color="inherit" sx={{ padding: '0px' }}>
           Login
         </Button>
