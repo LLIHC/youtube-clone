@@ -4,17 +4,18 @@ import Button from '@mui/material/Button';
 import { useGoogleLogin, useGoogleLogout } from 'react-google-login';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { loggedInState } from '../state/login';
+import { isLoginState } from '../state/login';
 
 const clientId = '986704124267-8p8q17fs47f0htp7s686suvu21rmdmf2.apps.googleusercontent.com';
 
 
 function GoogleLoginBtn() {
-  const setLoggedIn = useSetRecoilState(loggedInState);
+  const setIsLogin = useSetRecoilState(isLoginState);
 
   const onSuccess = async (response: any) => {
     // const { googleId, profileObj: { email, name } } = response;
-    setLoggedIn(true);
+    console.log(response);
+    setIsLogin(true);
   };
 
   const onFailure = (error: any) => {
@@ -30,6 +31,7 @@ function GoogleLoginBtn() {
       uxMode: 'redirect',
       redirectUri: window.location.href,
       cookiePolicy: 'single_host_origin',
+      accessType: 'offline',
     },
   );
 
@@ -42,10 +44,10 @@ function GoogleLoginBtn() {
 
 
 function GoogleLogoutBtn() {
-  const setLoggedIn = useSetRecoilState(loggedInState);
+  const setIsLogin = useSetRecoilState(isLoginState);
 
   const onLogoutSuccess = () => {
-    setLoggedIn(false);
+    setIsLogin(false);
   };
 
   const onFailure = () => {
@@ -56,8 +58,6 @@ function GoogleLogoutBtn() {
     clientId,
     onLogoutSuccess,
     onFailure,
-    uxMode: 'redirect',
-    redirectUri: window.location.href,
   });
 
   return (
@@ -70,11 +70,11 @@ function GoogleLogoutBtn() {
 
 
 function GoogleLoginComponent() {
-  const loggedIn = useRecoilValue(loggedInState);
+  const isLogin = useRecoilValue(isLoginState);
 
   return (
     <>
-      {loggedIn ? (<GoogleLogoutBtn />) : (<GoogleLoginBtn />)}
+      {isLogin ? (<GoogleLogoutBtn />) : (<GoogleLoginBtn />)}
     </>
   );
 }
