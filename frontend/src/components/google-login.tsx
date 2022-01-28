@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from '@mui/material/Button';
-import { useGoogleLogin } from 'react-google-login';
+import { useGoogleLogin, useGoogleLogout } from 'react-google-login';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { loggedInState } from '../state/login';
@@ -13,13 +13,7 @@ function GoogleLoginBtn() {
   const setLoggedIn = useSetRecoilState(loggedInState);
 
   const onSuccess = async (response: any) => {
-    const { googleId, profileObj: { email, name } } = response;
-
-    // TODO: 상태정보 저장
-    console.log(
-      { googleId, profileObj: { email, name } },
-    );
-
+    // const { googleId, profileObj: { email, name } } = response;
     setLoggedIn(true);
   };
 
@@ -35,6 +29,7 @@ function GoogleLoginBtn() {
       isSignedIn: true,
       uxMode: 'redirect',
       redirectUri: window.location.href,
+      cookiePolicy: 'single_host_origin',
     },
   );
 
@@ -46,11 +41,41 @@ function GoogleLoginBtn() {
 }
 
 
+function GoogleLogoutBtn() {
+  const setLoggedIn = useSetRecoilState(loggedInState);
+
+  const onLogoutSuccess = () => {
+    setLoggedIn(false);
+  };
+
+  const onFailure = () => {
+    console.log('Failure');
+  };
+
+  const { signOut } = useGoogleLogout({
+    clientId,
+    onLogoutSuccess,
+    onFailure,
+    uxMode: 'redirect',
+    redirectUri: window.location.href,
+  });
+
+  return (
+    <Button color="inherit" sx={{ padding: '0px' }} onClick={signOut}>
+      Logout
+    </Button>
+  );
+
+}
+
+
 function GoogleLoginComponent() {
   const loggedIn = useRecoilValue(loggedInState);
 
   return (
-    <GoogleLoginBtn />
+    <>
+      {loggedIn ? (<GoogleLogoutBtn />) : (<GoogleLoginBtn />)}
+    </>
   );
 }
 
