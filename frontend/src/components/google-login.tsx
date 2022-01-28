@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Button from '@mui/material/Button';
 import { useGoogleLogin, useGoogleLogout } from 'react-google-login';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -14,7 +15,6 @@ function GoogleLoginBtn() {
 
   const onSuccess = async (response: any) => {
     // const { googleId, profileObj: { email, name } } = response;
-    console.log(response);
     setIsLogin(true);
   };
 
@@ -36,8 +36,8 @@ function GoogleLoginBtn() {
   );
 
   return (
-    <Button color="inherit" sx={{ padding: '0px' }} onClick={signIn}>
-      Login
+    <Button variant="outlined" sx={{ borderRadius: '0px' }} onClick={signIn} startIcon={<AccountCircleOutlinedIcon />} >
+      로그인
     </Button>
   );
 }
