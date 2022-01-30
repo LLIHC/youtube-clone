@@ -3,3 +3,4 @@ uvicorn
 python-dotenv
 pre-commit
 sqlalchemy
+uvicorn
