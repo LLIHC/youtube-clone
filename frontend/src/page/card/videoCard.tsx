@@ -25,7 +25,7 @@ export default function VideoCard({ videoId }: VideoCardProps) {
   
   const handleClick = useCallback(() => {
     navigate(`/watch?v=${video.id}`);
-  }, [navigate, video.id]);
+  }, [navigate, video]);
 
   return (
     <StyledCard onClick={handleClick}>
