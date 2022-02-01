@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/header';
 import Home from './page/home';
+import Watch from './page/watch';
 
 const Root = styled('div')({
   display: 'flex',
@@ -19,6 +20,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/watch" element={<Watch />} />
       </Routes>
     </Root>
   );
