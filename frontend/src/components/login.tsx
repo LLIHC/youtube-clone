@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Button from '@mui/material/Button';
@@ -7,7 +7,16 @@ import { useSetRecoilState } from 'recoil';
 
 import { isLoginState } from '../state/login';
 
-const clientId = '986704124267-8p8q17fs47f0htp7s686suvu21rmdmf2.apps.googleusercontent.com';
+
+declare var process: {
+  env: {
+    REACT_APP_LOGIN_CLIEND_ID: string
+  };
+};
+
+const clientId = useMemo(
+  () => process.env.REACT_APP_LOGIN_CLIEND_ID, [],
+);
 
 
 export function LoginButton() {
