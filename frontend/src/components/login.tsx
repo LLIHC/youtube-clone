@@ -36,9 +36,8 @@ export function LoginButton() {
       clientId,
       isSignedIn: true,
       uxMode: 'redirect',
-      redirectUri: window.location.href,
+      redirectUri: window.location.origin,
       cookiePolicy: 'single_host_origin',
-      accessType: 'offline',
     },
   );
 
