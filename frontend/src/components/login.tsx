@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Button from '@mui/material/Button';
@@ -14,22 +14,20 @@ declare var process: {
   };
 };
 
-const clientId = useMemo(
-  () => process.env.REACT_APP_LOGIN_CLIEND_ID, [],
-);
+const clientId = process.env.REACT_APP_LOGIN_CLIEND_ID;
 
 
 export function LoginButton() {
   const setIsLogin = useSetRecoilState(isLoginState);
 
-  const onSuccess = async (response: any) => {
+  const onSuccess = useCallback(async (response: any) => {
     // const { googleId, profileObj: { email, name } } = response;
     setIsLogin(true);
-  };
+  }, [setIsLogin]);
 
-  const onFailure = (error: any) => {
+  const onFailure = useCallback((error: any) => {
     console.log(error);
-  };
+  }, []);
 
   const { signIn } = useGoogleLogin(
     {
@@ -55,13 +53,13 @@ export function LoginButton() {
 export function LogoutButton() {
   const setIsLogin = useSetRecoilState(isLoginState);
 
-  const onLogoutSuccess = () => {
+  const onLogoutSuccess = useCallback(() => {
     setIsLogin(false);
-  };
+  }, [setIsLogin]);
 
-  const onFailure = () => {
+  const onFailure = useCallback(() => {
     console.log('Failure');
-  };
+  }, []);
 
   const { signOut } = useGoogleLogout({
     clientId,
