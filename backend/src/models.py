@@ -11,7 +11,7 @@ class Channel(Base):
     hashed_id = Column(String, unique=True)
     thumbnail_url = Column(String, index=True)
     name = Column(String)
-    followers = Column(Integer)
+    n_followers = Column(Integer, default=0)
 
     contents = relationship("Content", back_populates="owner")
 
