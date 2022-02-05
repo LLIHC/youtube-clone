@@ -8,9 +8,9 @@ class Channel(Base):
     __tablename__ = "channels"
 
     hashed_id = Column(String, primary_key=True, index=True)
-    channel_thumbnail_url = Column(String, index=True)
-    channel_name = Column(String)
-    channel_followers = Column(Integer)
+    thumbnail_url = Column(String, index=True)
+    name = Column(String)
+    followers = Column(Integer)
 
     contents = relationship("Content", back_populates="owner")
 
