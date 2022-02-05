@@ -27,7 +27,5 @@ class Content(Base):
     content_description = Column(String)
     n_likes = Column(Integer)
     thumbnail_url = Column(String)
-    playtime = Column(Integer)
-    channel_hashed_id = Column(String, ForeignKey("channels.hashed_id"))
-
-    owner = relationship("Channel", back_populates="contents")
+    channel_id = Column(String, ForeignKey("channels.hashed_id"))
+    # owner_id = relationship("Channel", back_populates="contents")
