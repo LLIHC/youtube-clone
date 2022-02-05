@@ -7,7 +7,8 @@ from .database import Base
 class Channel(Base):
     __tablename__ = "channels"
 
-    hashed_id = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
+    hashed_id = Column(String, unique=True)
     thumbnail_url = Column(String, index=True)
     name = Column(String)
     followers = Column(Integer)
@@ -18,7 +19,8 @@ class Channel(Base):
 class Content(Base):
     __tablename__ = "contents"
 
-    hashed_id = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
+    hashed_id = Column(String, unique=True)
     title = Column(String)
     n_views = Column(Integer)
     upload_date = Column(DateTime)
