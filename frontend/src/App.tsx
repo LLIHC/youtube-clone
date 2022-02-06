@@ -14,14 +14,22 @@ const Root = styled('div')({
   width: '100vw',
 });
 
+const Content = styled('div')({
+  height: '100%',
+  width: '100%',
+  marginTop: '56px',
+});
+
 export default function App() {
   return (
     <Root>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/watch" element={<Watch />} />
-      </Routes>
+      <Content>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/watch" element={<Watch />} />
+        </Routes>
+      </Content>
     </Root>
   );
 }
