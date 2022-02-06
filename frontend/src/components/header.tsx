@@ -10,10 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useRecoilValue } from 'recoil';
 
-import { isLoginState } from '../state/login';
-import { LoginButton, LogoutButton } from './login';
+import AccountButton from './account/account';
+
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -45,7 +44,6 @@ const SearchInputBase = styled(InputBase)({
 
 
 export default function Header() {
-  const isLogin = useRecoilValue(isLoginState);
 
   return (
     <StyledAppBar>
@@ -62,7 +60,7 @@ export default function Header() {
           <SearchInputBase placeholder="Search" />
           <Button variant="outlined" startIcon={<SearchIcon />} />
         </SearchBox>
-        {isLogin ? (<LogoutButton />) : (<LoginButton />)}
+        <AccountButton />
       </StyledToolbar>
     </StyledAppBar>
   );

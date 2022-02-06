@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { useGoogleLogin, useGoogleLogout } from 'react-google-login';
 import { useSetRecoilState } from 'recoil';
 
-import { isLoginState } from '../state/login';
+import { isLoginState } from '../../state/account/login';
 
 
 declare var process: {
