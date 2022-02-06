@@ -15,8 +15,8 @@ class ContentCreate(ContentBase):
 
 
 class Content(ContentBase):
-    n_views: int
-    n_likes: int
+    # n_views: int
+    # n_likes: int
 
     class Config:
         orm_mode = True
