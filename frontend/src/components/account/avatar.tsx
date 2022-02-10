@@ -7,7 +7,6 @@ import { useRecoilValue } from 'recoil';
 import { avatarImageUrl } from '../../state/account/avatar';
 
 
-
 const StyledButton = styled(Button)({
   height: '38px',
   minWidth: '48px',
@@ -19,11 +18,12 @@ const StyledButton = styled(Button)({
 });
 
 
-const StyledImg = styled('img')({
+const StyledImg = styled('img')((props: any) => ({
   height: '32px',
   width: '32px',
   borderRadius: '70%',
-});
+  border: props.open ? '0px' : '1px solid blue',
+}));
 
 
 export default function AvatarButton(props: any) {
@@ -31,7 +31,7 @@ export default function AvatarButton(props: any) {
 
   return (
     <StyledButton disableRipple color='inherit' {...props} >
-      <StyledImg src={imageUrl} />
+      <StyledImg src={imageUrl} open={props.open} />
     </StyledButton>
   );
 }

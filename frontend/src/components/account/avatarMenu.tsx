@@ -20,7 +20,7 @@ export default function AvatarMenuButton() {
 
   return (
     <div>
-      <AvatarButton onClick={handleClick} />
+      <AvatarButton onClick={handleClick} open={open} />
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
         <MenuItem>
