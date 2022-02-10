@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import { AvatarButton } from './avatar';
+import AvatarButton from './avatar';
 import { LogoutButton } from './login';
 
 

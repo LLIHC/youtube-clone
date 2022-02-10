@@ -26,11 +26,11 @@ const StyledImg = styled('img')({
 });
 
 
-export function AvatarButton() {
+export default function AvatarButton(props: any) {
   const imageUrl = useRecoilValue(avatarImageUrl);
 
   return (
-    <StyledButton disableRipple color='inherit'>
+    <StyledButton disableRipple color='inherit' {...props} >
       <StyledImg src={imageUrl} />
     </StyledButton>
   );
