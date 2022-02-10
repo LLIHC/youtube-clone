@@ -3,14 +3,14 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { isLoginState } from '../../state/account/login';
-import { LoginButton, LogoutButton } from './login';
-
+import { AvatarButton } from './avatar';
+import { LoginButton } from './login';
 
 function AccountButton() {
   const isLogin = useRecoilValue(isLoginState);
   return (
     <>
-      {isLogin ? (<LogoutButton />) : (<LoginButton />)}
+      {isLogin ? (<AvatarButton />) : (<LoginButton />)}
     </>
   );
 }
