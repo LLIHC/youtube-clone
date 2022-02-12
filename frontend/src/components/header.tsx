@@ -11,6 +11,8 @@ import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import AccountButton from './account/account';
+
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -42,6 +44,7 @@ const SearchInputBase = styled(InputBase)({
 
 
 export default function Header() {
+
   return (
     <StyledAppBar>
       <StyledToolbar variant="dense">
@@ -57,9 +60,7 @@ export default function Header() {
           <SearchInputBase placeholder="Search" />
           <Button variant="outlined" startIcon={<SearchIcon />} />
         </SearchBox>
-        <Button color="inherit" sx={{ padding: '0px' }}>
-          Login
-        </Button>
+        <AccountButton />
       </StyledToolbar>
     </StyledAppBar>
   );
