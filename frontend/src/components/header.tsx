@@ -57,10 +57,11 @@ const AlignBox = styled(Box)({
 });
 
 export default function Header() {
-  const [opened, setOpen] = useState(true);
+  const [expanded, setExpand] = useState(true);
+
   const handleDrawer = useCallback(() => {
-    setOpen(!opened);
-  }, [setOpen, opened]);
+    setExpand(!expanded);
+  }, [setExpand, expanded]);
 
   const startItems = useMemo(() => (<AlignBox>
     <MenuButton color="inherit" aria-label="menu" onClick={handleDrawer}>
@@ -89,7 +90,7 @@ export default function Header() {
         {endItems}
       </StyledToolbar>
     </StyledAppBar>
-    <CustomDrawer opened={opened}/>
+    <CustomDrawer expanded={expanded}/>
   </Box>
   );
 }
