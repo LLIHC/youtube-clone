@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,10 +11,9 @@ import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import CustomDrawer from './drawer';
+import Drawer from './drawer';
 
 const StyledAppBar = styled(AppBar)({
-  position: 'fixed',
   backgroundColor: '#fafafa',
   color: '#212121',
   display: 'block',
@@ -44,11 +43,11 @@ const SearchInputBase = styled(InputBase)({
 });
 
 export default function Header() {
-  const [expanded, setExpand] = useState(true);
+  const [expand, setExpand] = useState(true);
 
   const handleDrawer = useCallback(() => {
-    setExpand(!expanded);
-  }, [setExpand, expanded]);
+    setExpand(!expand);
+  }, [setExpand, expand]);
 
   return (
     <Box>
@@ -71,7 +70,7 @@ export default function Header() {
         </Button>
       </StyledToolbar>
     </StyledAppBar>
-    <CustomDrawer expanded={expanded}/>
+    <Drawer expand={expand}/>
   </Box>
   );
 }
