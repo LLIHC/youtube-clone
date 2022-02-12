@@ -44,11 +44,11 @@ const SearchInputBase = styled(InputBase)({
 });
 
 export default function Header() {
-  const [opened, setOpen] = useState(true);
+  const [expanded, setExpand] = useState(true);
 
   const handleDrawer = useCallback(() => {
-    setOpen(!opened);
-  }, [setOpen, opened]);
+    setExpand(!expanded);
+  }, [setExpand, expanded]);
 
   return (
     <Box>
@@ -71,7 +71,7 @@ export default function Header() {
         </Button>
       </StyledToolbar>
     </StyledAppBar>
-    <CustomDrawer opened={opened}/>
+    <CustomDrawer expanded={expanded}/>
   </Box>
   );
 }

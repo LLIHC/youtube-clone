@@ -16,19 +16,19 @@ const StyledDrawer = styled(MuiDrawer)({
   whiteSpace: 'nowrap',
   boxSizing: 'border-box',
   anchor: 'left',
-}, ({ opened }: StyledDrawerProps)=> ({
-  width: opened ? 60 : 200,
-  '& .MuiDrawer-paper': { width: opened ? 60 : 200 },
+}, ({ expanded }: StyledDrawerProps)=> ({
+  width: expanded ? 60 : 200,
+  '& .MuiDrawer-paper': { width: expanded ? 60 : 200 },
 
 }));
 
 interface StyledDrawerProps {
-  opened : boolean,
+  expanded : boolean,
 }
 
-export default function CustomDrawer({ opened } : StyledDrawerProps) {
+export default function CustomDrawer({ expanded } : StyledDrawerProps) {
   return (
-    <StyledDrawer variant="permanent" opened={opened}>
+    <StyledDrawer variant="permanent" expanded={expanded}>
     <Toolbar />
     <List>
       {['홈', '탐색', '구독', 'originals'].map((text, index) => (
