@@ -12,6 +12,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import Drawer from './drawer';
+import AccountButton from './account/account';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -65,9 +66,7 @@ export default function Header() {
           <SearchInputBase placeholder="Search" />
           <Button variant="outlined" startIcon={<SearchIcon />} />
         </SearchBox>
-        <Button color="inherit" sx={{ padding: '0px' }}>
-          Login
-        </Button>
+        <AccountButton />
       </StyledToolbar>
     </StyledAppBar>
     <Drawer expand={expand}/>
