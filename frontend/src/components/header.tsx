@@ -21,7 +21,7 @@ const StyledAppBar = styled(AppBar)({
   display: 'block',
   height: '56px',
   width: '100%',
-  top: '0px',
+  top: 0,
 });
 
 const StyledToolbar = styled(Toolbar)({
