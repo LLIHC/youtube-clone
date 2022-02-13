@@ -60,17 +60,7 @@ const SearchButton = styled(Button)({
   height: '40px',
 });
 
-const Start = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-});
-
-const Center = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-});
-
-const End = styled(Box)({
+const AlignBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
 });
@@ -81,7 +71,7 @@ export default function Header() {
     navigate('/');
   }, [navigate]);
 
-  const startItems = useMemo(() => (<Start>
+  const startItems = useMemo(() => (<AlignBox>
     <MenuButton color="inherit" aria-label="menu">
       <MenuIcon />
     </MenuButton>
@@ -90,18 +80,18 @@ export default function Header() {
         <Logo />
       </LogoIcon>
     </LogoButton>
-  </Start>), []);
+  </AlignBox>), []);
 
-  const centerItems = useMemo(() => (<Center>
+  const centerItems = useMemo(() => (<AlignBox>
     <SearchInputBase placeholder="Search" />
     <SearchButton variant="outlined" aria-label="search">
       <SearchIcon />
     </SearchButton>
-  </Center>), []);
+  </AlignBox>), []);
 
-  const endItems = useMemo(() => (<End>
+  const endItems = useMemo(() => (<AlignBox>
     <AccountButton />
-  </End>), []);
+  </AlignBox>), []);
 
   return (
     <StyledAppBar>
