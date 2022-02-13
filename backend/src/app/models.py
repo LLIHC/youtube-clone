@@ -28,4 +28,4 @@ class Content(Base):
     # n_likes = Column(Integer)
     thumbnail_url = Column(String)
     channel_id = Column(Integer, ForeignKey("channels.hashed_id"))
-    # owner_id = relationship("Channel", back_populates="contents")
+    owner = relationship("Channel", back_populates="contents")
