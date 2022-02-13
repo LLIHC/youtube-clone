@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from . import models
+from . import models, schemas
 
 
 def get_contents(db: Session, skip: int = 0, limit: int = 100):
