@@ -1,13 +1,10 @@
-from typing import List
-
 import uvicorn
-from fastapi import Depends, FastAPI
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 from uvicorn.config import LOGGING_CONFIG
 
-from app import crud, models, schemas
+from app import models
 from app.api import api_router
-from app.database import SessionLocal, engine
+from app.database import engine
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -21,30 +18,6 @@ app = FastAPI(
     title="Backend", version="1.0", description="Serving Youtube Backend"
 )
 app.include_router(api_router)
-
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-@app.post("/channels/", response_model=schemas.Channel)
-def create_user(channel: schemas.ChannelCreate, db: Session = Depends(get_db)):
-    # db_channel = crud.get_user_by_email(db, email=user.email)
-    # if db_channel:
-    #     raise HTTPException(status_code=400, detail="Channel already registered")
-    return crud.create_channel(db=db, channel=channel)
-
-
-@app.get("/channels/", response_model=List[schemas.Channel])
-def get_channels(
-    skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
-):
-    channels = crud.get_channels(db, skip=skip, limit=limit)
-    return channels
 
 
 if __name__ == "__main__":
