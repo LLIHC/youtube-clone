@@ -6,7 +6,7 @@ from pydantic import BaseModel
 class ContentBase(BaseModel):
     hashed_id: str
     title: str
-    content_description: str
+    description: str
     thumbnail_url: str
     channel_id: int
 
