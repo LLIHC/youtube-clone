@@ -34,7 +34,7 @@ class ChannelCreate(ChannelBase):
 
 class Channel(ChannelBase):
     id: int
-    n_followers: int
+    # n_followers: int
     contents: List[Content] = []
 
     class Config:
