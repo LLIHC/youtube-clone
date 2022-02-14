@@ -10,6 +10,12 @@ from app.api import api_router
 
 models.Base.metadata.create_all(bind=engine)
 
+with engine.begin() as conn:
+    conn.execute('PRAGMA foreign_keys = OFF;')
+    for table in reversed(models.Base.metadata.sorted_tables):
+        conn.execute('DELETE FROM {};'.format(table.name))
+    conn.execute('PRAGMA foreign_keys = ON;')
+
 app = FastAPI(
     title="Backend", version="1.0", description="Serving Youtube Backend"
 )
