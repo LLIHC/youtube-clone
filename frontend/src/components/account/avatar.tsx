@@ -18,16 +18,16 @@ const StyledButton = styled(Button)({
 });
 
 
-interface StyledImgProps {
+interface AvatarImgProps {
   open: boolean;
 }
 
 
-const StyledImg = styled('img')({
+const AvatarImg = styled('img')({
   height: '32px',
   width: '32px',
   borderRadius: '70%',
-}, ({ open }: StyledImgProps) => ({
+}, ({ open }: AvatarImgProps) => ({
   border: open ? '0px' : '1px solid blue',
 }));
 
@@ -42,7 +42,7 @@ export default function AvatarButton({ open, ...restProps }: AvatarButtonProps) 
 
   return (
     <StyledButton disableRipple color='inherit' {...restProps} >
-      <StyledImg src={imageUrl} open={open} />
+      <AvatarImg src={imageUrl} open={open} />
     </StyledButton>
   );
 }
