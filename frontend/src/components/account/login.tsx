@@ -2,7 +2,12 @@ import React, { useCallback } from 'react';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Button from '@mui/material/Button';
-import { useGoogleLogin, useGoogleLogout } from 'react-google-login';
+import {
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+  useGoogleLogin,
+  useGoogleLogout,
+} from 'react-google-login';
 import { useSetRecoilState } from 'recoil';
 
 import { avatarImageUrl } from '../../state/account/avatar';
@@ -22,13 +27,14 @@ export function LoginButton() {
   const setIsLogin = useSetRecoilState(isLoginState);
   const setUserImage = useSetRecoilState(avatarImageUrl);
 
-  const onSuccess = useCallback(async (response: any) => {
-    // const { googleId, profileObj: { email, name } } = response;
-    const { profileObj: { imageUrl } } = response;
+  const onSuccess = useCallback(
+    async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+      const imageUrl = 'profileObj' in response ? response.profileObj.imageUrl : '';
+      // const { googleId, profileObj: { email, name } } = response;
 
-    setUserImage(imageUrl);
-    setIsLogin(true);
-  }, [setIsLogin]);
+      setUserImage(imageUrl);
+      setIsLogin(true);
+    }, [setIsLogin]);
 
   const onFailure = useCallback((error: any) => {
     console.log(error);

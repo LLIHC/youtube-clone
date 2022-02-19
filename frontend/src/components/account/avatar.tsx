@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from '@emotion/styled';
-import Button from '@mui/material/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 import { useRecoilValue } from 'recoil';
 
 import { avatarImageUrl } from '../../state/account/avatar';
@@ -18,20 +18,31 @@ const StyledButton = styled(Button)({
 });
 
 
-const StyledImg = styled('img')((props: any) => ({
+interface StyledImgProps {
+  open: boolean;
+}
+
+
+const StyledImg = styled('img')({
   height: '32px',
   width: '32px',
   borderRadius: '70%',
-  border: props.open ? '0px' : '1px solid blue',
+}, ({ open }: StyledImgProps) => ({
+  border: open ? '0px' : '1px solid blue',
 }));
 
 
-export default function AvatarButton(props: any) {
+interface AvatarButtonProps extends ButtonProps {
+  open: boolean;
+}
+
+
+export default function AvatarButton({ open, ...restProps }: AvatarButtonProps) {
   const imageUrl = useRecoilValue(avatarImageUrl);
 
   return (
-    <StyledButton disableRipple color='inherit' {...props} >
-      <StyledImg src={imageUrl} open={props.open} />
+    <StyledButton disableRipple color='inherit' {...restProps} >
+      <StyledImg src={imageUrl} open={open} />
     </StyledButton>
   );
 }

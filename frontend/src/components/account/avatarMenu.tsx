@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { MouseEvent, useCallback, useState } from 'react';
 
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,10 +8,10 @@ import { LogoutButton } from './login';
 
 
 export default function AvatarMenuButton() {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<EventTarget & Element | null>(null);
   const open = Boolean(anchorEl);
 
-  const handleClick = useCallback((event: any) => {
+  const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   }, [setAnchorEl]);
   const handleClose = useCallback(() => {
