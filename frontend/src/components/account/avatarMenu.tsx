@@ -8,20 +8,20 @@ import { LogoutButton } from './login';
 
 
 export default function AvatarMenuButton() {
-  const [anchorEl, setAnchorEl] = useState<EventTarget & Element | null>(null);
-  const open = Boolean(anchorEl);
+  const [anchorElement, setAnchorElement] = useState<EventTarget & Element | null>(null);
+  const open = Boolean(anchorElement);
 
   const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  }, [setAnchorEl]);
+    setAnchorElement(event.currentTarget);
+  }, [setAnchorElement]);
   const handleClose = useCallback(() => {
-    setAnchorEl(null);
-  }, [setAnchorEl]);
+    setAnchorElement(null);
+  }, [setAnchorElement]);
 
   return (
     <div>
       <AvatarButton onClick={handleClick} open={open} />
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}
+      <Menu anchorEl={anchorElement} open={open} onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
         <MenuItem>
           <LogoutButton />
