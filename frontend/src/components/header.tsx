@@ -11,8 +11,8 @@ import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import Drawer from './drawer';
 import AccountButton from './account/account';
+import Drawer from './drawer';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -44,11 +44,11 @@ const SearchInputBase = styled(InputBase)({
 });
 
 export default function Header() {
-  const [expand, setExpand] = useState(true);
+  const [isExpanded, setIsExpand] = useState(true);
 
   const handleDrawer = useCallback(() => {
-    setExpand(!expand);
-  }, [setExpand, expand]);
+    setIsExpand(!isExpanded);
+  }, [setIsExpand, isExpanded]);
 
   return (
     <Box>
@@ -69,7 +69,7 @@ export default function Header() {
         <AccountButton />
       </StyledToolbar>
     </StyledAppBar>
-    <Drawer expand={expand}/>
+    <Drawer isExpanded={isExpanded}/>
   </Box>
   );
 }
