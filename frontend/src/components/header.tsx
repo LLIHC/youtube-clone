@@ -82,14 +82,14 @@ export default function Header() {
 
   return (
     <Box>
-    <StyledAppBar>
-      <StyledToolbar variant="dense">
-        {startItems}
-        {centerItems}
-        {endItems}
-      </StyledToolbar>
-    </StyledAppBar>
-    <Drawer isExpanded={isDrawerExpanded}/>
-  </Box>
+      <StyledAppBar>
+        <StyledToolbar variant="dense">
+          {startItems}
+          {centerItems}
+          {endItems}
+        </StyledToolbar>
+      </StyledAppBar>
+      <Drawer isExpanded={isDrawerExpanded} />
+    </Box>
   );
 }
