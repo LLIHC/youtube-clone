@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -9,10 +9,10 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 
 import AccountButton from './account/account';
 import Drawer from './drawer';
+import LogoButton from './logo-button';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -20,56 +20,76 @@ const StyledAppBar = styled(AppBar)({
   display: 'block',
   height: '56px',
   width: '100%',
-  zIndex: '1400',
+  zIndex: 1400,
+  top: 0,
 });
 
 const StyledToolbar = styled(Toolbar)({
   height: '100%',
-});
-
-const SearchBox = styled(Box)({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'nowrap',
+  padding: '0 16px',
+  justifyContent: 'space-between',
 });
 
 const SearchInputBase = styled(InputBase)({
   width: '89%',
-  height: '33px',
+  height: '40px',
   padding: '0 10px',
   color: '#000',
   border: '1px solid #BEBEBE',
   borderRadius: '2px 0 0 2px',
-  zIndex: 2,
+});
+
+const MenuButton = styled(IconButton)({
+  width: '24px',
+  height: '24px',
+  padding: '8px',
+});
+
+const SearchButton = styled(Button)({
+  padding: 0,
+  height: '40px',
+});
+
+const AlignBox = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
 });
 
 export default function Header() {
-  const [isExpanded, setIsExpand] = useState(true);
+  const [isDrawerExpanded, setIsDrawerExpand] = useState(true);
 
   const handleDrawer = useCallback(() => {
-    setIsExpand(!isExpanded);
-  }, [setIsExpand, isExpanded]);
+    setIsDrawerExpand(!isDrawerExpanded);
+  }, [setIsDrawerExpand, isDrawerExpanded]);
+
+  const startItems = useMemo(() => (<AlignBox>
+    <MenuButton color="inherit" aria-label="menu" onClick={handleDrawer}>
+      <MenuIcon />
+    </MenuButton>
+    <LogoButton />
+  </AlignBox>), [handleDrawer]);
+
+  const centerItems = useMemo(() => (<AlignBox>
+    <SearchInputBase placeholder="Search" />
+    <SearchButton variant="outlined" aria-label="search">
+      <SearchIcon />
+    </SearchButton>
+  </AlignBox>), []);
+
+  const endItems = useMemo(() => (<AlignBox>
+    <AccountButton />
+  </AlignBox>), []);
 
   return (
     <Box>
     <StyledAppBar>
       <StyledToolbar variant="dense">
-        <IconButton onClick={handleDrawer} size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton>
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography variant="h6" component="div">
-            Youtube
-          </Typography>
-        </Box>
-        <SearchBox>
-          <SearchInputBase placeholder="Search" />
-          <Button variant="outlined" startIcon={<SearchIcon />} />
-        </SearchBox>
-        <AccountButton />
+        {startItems}
+        {centerItems}
+        {endItems}
       </StyledToolbar>
     </StyledAppBar>
-    <Drawer isExpanded={isExpanded}/>
+    <Drawer isExpanded={isDrawerExpanded}/>
   </Box>
   );
 }

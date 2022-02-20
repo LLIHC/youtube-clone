@@ -15,7 +15,7 @@ const Root = styled('div')({
 });
 
 const Content = styled('div')({
-  height: '100%',
+  height: 'calc(100% - 56px)',
   width: '100%',
   marginTop: '56px',
 });
