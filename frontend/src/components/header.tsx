@@ -80,24 +80,6 @@ export default function Header() {
     <AccountButton />
   </AlignBox>), []);
 
-  const startItems = useMemo(() => (<AlignBox>
-    <MenuButton color="inherit" aria-label="menu" onClick={handleDrawer}>
-      <MenuIcon />
-    </MenuButton>
-    <LogoButton />
-  </AlignBox>), [handleDrawer]);
-
-  const centerItems = useMemo(() => (<AlignBox>
-    <SearchInputBase placeholder="Search" />
-    <SearchButton variant="outlined" aria-label="search">
-      <SearchIcon />
-    </SearchButton>
-  </AlignBox>), []);
-
-  const endItems = useMemo(() => (<AlignBox>
-    <AccountButton />
-  </AlignBox>), []);
-
   return (
     <Box>
     <StyledAppBar>
