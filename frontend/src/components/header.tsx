@@ -11,8 +11,8 @@ import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 
 import AccountButton from './account/account';
-import LogoButton from './logo-button';
 import Drawer from './drawer';
+import LogoButton from './logo-button';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -56,11 +56,11 @@ const AlignBox = styled(Box)({
 });
 
 export default function Header() {
-  const [expand, setExpand] = useState(true);
+  const [isExpanded, setIsExpand] = useState(true);
 
   const handleDrawer = useCallback(() => {
-    setExpand(!expand);
-  }, [setExpand, expand]);
+    setIsExpand(!isExpanded);
+  }, [setIsExpand, isExpanded]);
 
   const startItems = useMemo(() => (<AlignBox>
     <MenuButton color="inherit" aria-label="menu" onClick={handleDrawer}>
@@ -89,7 +89,7 @@ export default function Header() {
         {endItems}
       </StyledToolbar>
     </StyledAppBar>
-    <Drawer expand={expand}/>
+    <Drawer expand={isExpanded}/>
   </Box>
   );
 }
