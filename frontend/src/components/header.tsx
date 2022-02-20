@@ -12,10 +12,9 @@ import Toolbar from '@mui/material/Toolbar';
 
 import AccountButton from './account/account';
 import LogoButton from './logo-button';
-import CustomDrawer from './drawer';
+import Drawer from './drawer';
 
 const StyledAppBar = styled(AppBar)({
-  position: 'fixed',
   backgroundColor: '#fafafa',
   color: '#212121',
   display: 'block',
@@ -57,11 +56,11 @@ const AlignBox = styled(Box)({
 });
 
 export default function Header() {
-  const [expanded, setExpand] = useState(true);
+  const [expand, setExpand] = useState(true);
 
   const handleDrawer = useCallback(() => {
-    setExpand(!expanded);
-  }, [setExpand, expanded]);
+    setExpand(!expand);
+  }, [setExpand, expand]);
 
   const startItems = useMemo(() => (<AlignBox>
     <MenuButton color="inherit" aria-label="menu" onClick={handleDrawer}>
@@ -90,7 +89,7 @@ export default function Header() {
         {endItems}
       </StyledToolbar>
     </StyledAppBar>
-    <CustomDrawer expanded={expanded}/>
+    <Drawer expand={expand}/>
   </Box>
   );
 }
