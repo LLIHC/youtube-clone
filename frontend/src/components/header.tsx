@@ -89,7 +89,7 @@ export default function Header() {
           {endItems}
         </StyledToolbar>
       </StyledAppBar>
-      <Drawer isExpanded={isDrawerExpanded} />
+      <Drawer expand={isDrawerExpanded} />
     </Box>
   );
 }
