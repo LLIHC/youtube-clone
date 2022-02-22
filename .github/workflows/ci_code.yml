@@ -1,0 +1,72 @@
+name: CI Code
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Backend
+    runs-on: ubuntu-latest
+    
+    env:
+      working-directory: "./backend"
+
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install mypy isort black
+
+      - name: Run isort
+        run: |
+          isort .
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run black
+        run: |
+          black src
+        working-directory: ${{ env.working-directory }}
+
+      - name: Run mypy
+        run: |
+          mypy
+        working-directory: ${{ env.working-directory }}
+
+  build:
+    name: Frontend
+    runs-on: ubuntu-latest
+
+    env:
+      working-directory: "./frontend"
+
+    strategy:
+      matrix:
+        node-version: [12.16.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: yarn install
+        run: yarn install
+        working-directory: ${{ env.working-directory }}
+        
+      - name: yarn lint
+        run: yarn install
+        working-directory: ${{ env.working-directory }}
