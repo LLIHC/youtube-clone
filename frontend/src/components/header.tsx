@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,6 +11,8 @@ import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
+import AccountButton from './account/account';
+import Drawer from './drawer';
 
 const StyledAppBar = styled(AppBar)({
   backgroundColor: '#fafafa',
@@ -18,6 +20,7 @@ const StyledAppBar = styled(AppBar)({
   display: 'block',
   height: '56px',
   width: '100%',
+  zIndex: '1400',
 });
 
 const StyledToolbar = styled(Toolbar)({
@@ -40,12 +43,18 @@ const SearchInputBase = styled(InputBase)({
   zIndex: 2,
 });
 
-
 export default function Header() {
+  const [isExpanded, setIsExpand] = useState(true);
+
+  const handleDrawer = useCallback(() => {
+    setIsExpand(!isExpanded);
+  }, [setIsExpand, isExpanded]);
+
   return (
+    <Box>
     <StyledAppBar>
       <StyledToolbar variant="dense">
-        <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+        <IconButton onClick={handleDrawer} size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
           <MenuIcon />
         </IconButton>
         <Box sx={{ flexGrow: 1 }}>
@@ -57,10 +66,10 @@ export default function Header() {
           <SearchInputBase placeholder="Search" />
           <Button variant="outlined" startIcon={<SearchIcon />} />
         </SearchBox>
-        <Button color="inherit" sx={{ padding: '0px' }}>
-          Login
-        </Button>
+        <AccountButton />
       </StyledToolbar>
     </StyledAppBar>
+    <Drawer isExpanded={isExpanded}/>
+  </Box>
   );
 }
