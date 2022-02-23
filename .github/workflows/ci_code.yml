@@ -33,12 +33,12 @@ jobs:
 
       - name: Run isort
         run: |
-          isort .
+          isort . --check-only
         working-directory: ${{ env.backend-directory }}
 
       - name: Run black
         run: |
-          black src
+          black . --check
         working-directory: ${{ env.backend-directory }}
 
       - name: Run mypy
