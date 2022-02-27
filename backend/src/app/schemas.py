@@ -10,6 +10,7 @@ class ContentBase(BaseModel):
     thumbnail_url: str
     channel_id: int
 
+
 class ContentCreate(ContentBase):
     pass
 
