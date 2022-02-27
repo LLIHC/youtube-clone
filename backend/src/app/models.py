@@ -24,7 +24,7 @@ class Content(Base):
     title = Column(String)
     # n_views = Column(Integer)
     # upload_date = Column(DateTime)
-    content_description = Column(String)
+    description = Column(String)
     # n_likes = Column(Integer)
     thumbnail_url = Column(String)
     channel_id = Column(Integer, ForeignKey("channels.hashed_id"))
