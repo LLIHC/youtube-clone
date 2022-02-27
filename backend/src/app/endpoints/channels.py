@@ -8,7 +8,7 @@ from .. import crud, database, schemas
 router = APIRouter()
 
 
-@router.post("/channels/", response_model=schemas.Channel)
+@router.post("/", response_model=schemas.Channel)
 def create_user(
     channel: schemas.ChannelCreate, db: Session = Depends(database.get_db)
 ):
@@ -18,7 +18,7 @@ def create_user(
     return crud.create_channel(db=db, channel=channel)
 
 
-@router.get("/channels/", response_model=List[schemas.Channel])
+@router.get("/", response_model=List[schemas.Channel])
 def get_channels(
     skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)
 ):
