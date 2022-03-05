@@ -23,7 +23,7 @@ const StyledGrid = styled(Grid)({
 }));
 
 
-const MAX_VIDEO_IDS = 10;
+const MAX_VIDEO_IDS = 30;
 
 
 function RangeRemainder10(start: number, end: number) {
@@ -97,21 +97,29 @@ export default function Home() {
     [isLoading, hasMore, nextCursor],
   );
 
+  const VideoGrids = useMemo(
+    () => {
+      return (
+        <Grid container spacing={2}>
+          {videoIds.map((videoId, index) => {
+            const isLastElement = videoIds.length === index + 1;
+            const elementRef = isLastElement ? lastElementRef : null;
+            return (
+              <div key={index} ref={elementRef}>
+                <StyledGrid item key={index} nrow={4} imargin={2}>
+                  <VideoCard key={videoId} videoId={videoId} />
+                </StyledGrid>
+              </div>
+            );
+          })}
+        </Grid>
+      );
+    }, [videoIds, cursor, isLoading],
+  );
+
   return (
     <div>
-      <Grid container spacing={2}>
-        {videoIds.map((videoId, index) => {
-          const isLastElement = videoIds.length === index + 1;
-          const elementRef = isLastElement ? lastElementRef : null;
-          return (
-            <div key={index} ref={elementRef}>
-              <StyledGrid item key={index} nrow={4} imargin={2}>
-                <VideoCard key={videoId} videoId={videoId} />
-              </StyledGrid>
-            </div>
-          );
-        })}
-      </Grid>
+      {VideoGrids}
       <div>{isLoading && 'Loading...'}</div>
     </div>
   );
