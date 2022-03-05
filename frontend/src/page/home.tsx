@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
 import Grid from '@mui/material/Grid';
@@ -80,27 +80,39 @@ export default function Home() {
   const [cursor, setCursor] = useState(1);
   const { videoIds, isLoading, hasMore, nextCursor } = fetchVideoIds(cursor);
 
-  const handleClick = useCallback(() => {
-    setCursor(nextCursor);
-  }, [nextCursor]);
+  const observer = useRef<IntersectionObserver | undefined>();
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
 
-  const videoGrid = useMemo(() => {
-    return videoIds.map((videoId, index) => (
-      <StyledGrid item key={index} nrow={4} imargin={2}>
-        <VideoCard key={videoId} videoId={videoId} />
-      </StyledGrid>
-    ));
-  }, [videoIds]);
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setCursor(nextCursor);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore, nextCursor],
+  );
 
   return (
     <div>
       <Grid container spacing={2}>
-        {videoGrid}
+        {videoIds.map((videoId, index) => {
+          const isLastElement = videoIds.length === index + 1;
+          const elementRef = isLastElement ? lastElementRef : null;
+          return (
+            <div key={index} ref={elementRef}>
+              <StyledGrid item key={index} nrow={4} imargin={2}>
+                <VideoCard key={videoId} videoId={videoId} />
+              </StyledGrid>
+            </div>
+          );
+        })}
       </Grid>
-      <button onClick={handleClick}>
-        버튼
-      </button>
+      <div>{isLoading && 'Loading...'}</div>
     </div>
-
   );
 }
