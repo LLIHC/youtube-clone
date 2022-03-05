@@ -28,6 +28,8 @@ function handleVideoIds(cursor: number, count: number = 4) {
       await setIsLoading(true);
 
       await setNextCursor(cursor + count);
+
+      // TODO: 새로운 비디오 아이디 불러오기
       const nextIndex = rangeRemainder10(cursor, cursor + count - 1);
       const nextVideoIds = nextIndex.map(
         index => sampleVideoIds[index],
