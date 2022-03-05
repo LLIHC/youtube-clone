@@ -5,22 +5,7 @@ import Grid from '@mui/material/Grid';
 import { useRecoilValue } from 'recoil';
 
 import { sampleVideoIdsAtom } from '../state';
-import VideoCard from './card/videoCard';
-
-
-interface StyledGridProps {
-  nrow: number;
-  imargin: number;
-}
-
-const StyledGrid = styled(Grid)({
-  position: 'relative',
-  marginBottom: '40px',
-}, ({ nrow, imargin }: StyledGridProps) => ({
-  marginLeft: `calc(${imargin}vw/2)`,
-  marginRight: `calc(${imargin}vw/2)`,
-  width: `calc(${nrow}/2 + ${imargin} - 0.01px)`,
-}));
+import VideoGrid from './grid/videoGrid';
 
 
 const MAX_VIDEO_IDS = 30;
@@ -97,29 +82,9 @@ export default function Home() {
     [isLoading, hasMore, nextCursor],
   );
 
-  const VideoGrids = useMemo(
-    () => {
-      return (
-        <Grid container spacing={2}>
-          {videoIds.map((videoId, index) => {
-            const isLastElement = videoIds.length === index + 1;
-            const elementRef = isLastElement ? lastElementRef : null;
-            return (
-              <div key={index} ref={elementRef}>
-                <StyledGrid item key={index} nrow={4} imargin={2}>
-                  <VideoCard key={videoId} videoId={videoId} />
-                </StyledGrid>
-              </div>
-            );
-          })}
-        </Grid>
-      );
-    }, [videoIds, cursor, isLoading],
-  );
-
   return (
     <div>
-      {VideoGrids}
+      <VideoGrid videoIds={videoIds} lastElementRef={lastElementRef} />
       <div>{isLoading && 'Loading...'}</div>
     </div>
   );
