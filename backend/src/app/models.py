@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from .database import Base
+from .database import Base, engine
 
 
 class Channel(Base):
@@ -29,3 +29,6 @@ class Content(Base):
     thumbnail_url = Column(String)
     channel_id = Column(Integer, ForeignKey("channels.hashed_id"))
     owner = relationship("Channel", back_populates="contents")
+
+
+Base.metadata.create_all(bind=engine)
