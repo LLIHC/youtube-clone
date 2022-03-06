@@ -1,41 +1,93 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import styled from '@emotion/styled';
-import Grid from '@mui/material/Grid';
 import { useRecoilValue } from 'recoil';
 
 import { sampleVideoIdsAtom } from '../state';
-import VideoCard from './card/videoCard';
+import VideoGrid from './grid/videoGrid';
 
 
-interface StyledGridProps {
-  nrow: number;
-  imargin: number;
+const MAX_VIDEO_IDS = 30;
+
+
+function rangeRemainder10(start: number, end: number) {
+  const full: number[] = Array.from(Array(end - start + 1).keys());
+  return full.map((_, idx) => (start + idx) % 10);
 }
 
-const StyledGrid = styled(Grid)({
-  position: 'relative',
-  marginBottom: '40px',
-}, ({ nrow, imargin }: StyledGridProps) => ({
-  marginLeft: `calc(${imargin}vw/2)`,
-  marginRight: `calc(${imargin}vw/2)`,
-  width: `calc(${nrow}/2 + ${imargin} - 0.01px)`,
-}));
+
+function handleVideoIds(cursor: number, count: number = 4) {
+  const sampleVideoIds = useRecoilValue(sampleVideoIdsAtom);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
+  const [nextCursor, setNextCursor] = useState(0);
+  const [videoIds, setVideoIds] = useState<string[]>([]);
+
+  const fetchVideoIds = useCallback(
+    async () => {
+      await setIsLoading(true);
+
+      await setNextCursor(cursor + count);
+
+      // TODO: 새로운 비디오 아이디 불러오기
+      const nextIndex = rangeRemainder10(cursor, cursor + count - 1);
+      const nextVideoIds = nextIndex.map(
+        index => sampleVideoIds[index],
+      );
+      setVideoIds(
+        (prev) => [...prev, ...nextVideoIds],
+      );
+
+      // mock fetching time
+      setTimeout(() => setIsLoading(false), 3000);
+    }, [cursor, count],
+  );
+
+  useEffect(
+    () => {
+      fetchVideoIds();
+    }, [cursor, count],
+  );
+
+  useEffect(
+    () => {
+      setHasMore(nextCursor <= MAX_VIDEO_IDS);
+    }, [setHasMore, nextCursor],
+  );
+
+  return { videoIds, isLoading, hasMore, nextCursor };
+}
+
 
 export default function Home() {
-  const videoIds = useRecoilValue(sampleVideoIdsAtom);
+  const [cursor, setCursor] = useState(1);
+  const { videoIds, isLoading, hasMore, nextCursor } = handleVideoIds(cursor);
 
-  const videoGrid = useMemo(() => {
-    return videoIds.map((videoId, index) => (
-      <StyledGrid item key={index} nrow={4} imargin={2}>
-        <VideoCard key={videoId} videoId={videoId} />
-      </StyledGrid>
-    ));
-  }, [videoIds]);
+  const observer = useRef<IntersectionObserver | undefined>();
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasMore) {
+            setCursor(nextCursor);
+          }
+        }, { threshold: 1.0 },
+      );
+      if (node) {
+        observer.current.observe(node);
+      }
+    },
+    [isLoading, hasMore, nextCursor],
+  );
 
   return (
-    <Grid container spacing={2}>
-      {videoGrid}
-    </Grid>
+    <div>
+      <VideoGrid videoIds={videoIds} lastElementRef={lastElementRef} />
+      <div>{isLoading && 'Loading...'}</div>
+    </div>
   );
 }
