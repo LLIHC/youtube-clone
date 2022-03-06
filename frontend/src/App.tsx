@@ -12,10 +12,11 @@ const Root = styled('div')({
   flexDirection: 'row',
   height: '100vh',
   width: '100vw',
+  overflowY: 'scroll',
 });
 
 const Content = styled('div')({
-  height: '100%',
+  height: 'calc(100% - 56px)',
   width: '100%',
   marginTop: '56px',
 });

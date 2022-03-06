@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from uvicorn.config import LOGGING_CONFIG
 
+from app import models
 from app.api import api_router
 from app.database import initialize_db
 
