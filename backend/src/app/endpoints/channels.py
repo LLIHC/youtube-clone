@@ -24,3 +24,9 @@ def get_channels(
 ):
     channels = crud.get_channels(db, skip=skip, limit=limit)
     return channels
+
+
+@router.delete("/", response_model=schemas.Channel)
+def delete_channel(hashed_id: str, db: Session = Depends(database.get_db)):
+    channels = crud.delete_channel(db, hashed_id)
+    return channels

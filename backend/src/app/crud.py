@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy.orm import Session
 
 from . import models, schemas
@@ -21,3 +23,17 @@ def create_channel(db: Session, channel: schemas.ChannelCreate):
     db.commit()
     db.refresh(db_channel)
     return db_channel
+
+
+def delete_channel(db: Session, hashed_id: str):
+    delete_hashed_id = (
+        db.query(models.Channel)
+        .filter(models.Channel.hashed_id == hashed_id)
+        .first()
+    )
+    if delete_hashed_id:
+        db.delete(delete_hashed_id)
+        db.commit()
+    else:
+        print("hased_id not found")
+    return delete_hashed_id
