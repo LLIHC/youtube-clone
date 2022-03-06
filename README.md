@@ -14,3 +14,11 @@ source venv/bin/activate
 # commit 전 실행
 pre-commit run -a
 ```
+
+
+## submodule 관리
+
+```
+git submodule init
+git submodule update
+```
