@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.endpoints import channels, contents
+from app.routers import channels, contents
 
 api_router = APIRouter()
 api_router.include_router(
