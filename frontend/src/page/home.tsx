@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 
 import { sampleVideoIdsAtom } from '../state';
 import VideoCard from './card/videoCard';
-
+import ChipWrapper from './chip_wrapper';
 
 interface StyledGridProps {
   nrow: number;
@@ -15,6 +15,7 @@ interface StyledGridProps {
 
 const StyledGrid = styled(Grid)({
   position: 'relative',
+  marginTop: '70px',
   marginBottom: '40px',
 }, ({ nrow, imargin }: StyledGridProps) => ({
   marginLeft: `calc(${imargin}vw/2)`,
@@ -35,6 +36,7 @@ export default function Home() {
 
   return (
     <Grid container spacing={2}>
+      <ChipWrapper />
       {videoGrid}
     </Grid>
   );
