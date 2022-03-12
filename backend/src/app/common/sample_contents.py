@@ -229,8 +229,8 @@ for i, sample_content in enumerate(sample_contents):
     sample_contents_query += f"(\"{sample_content['id']}\", "
     sample_contents_query += f"\"{sample_content['title']}\", "
     sample_contents_query += f"\"{sample_content['description']}\", "
-    sample_contents_query += '"fake_url", '
-    if i < len(sample_contents) - 1:
-        sample_contents_query += "1),\n"
-    else:
-        sample_contents_query += "1);"
+    sample_contents_query += f"\"{sample_content.get('thumbnail_url', 'fake_url')}\", "
+    sample_contents_query += f"{sample_content.get('channel_id', 1)})\"
+    
+    endline =  ",\n" if  i < len(sample_contents) - 1 else ";"
+    sample_contents_query += endline
