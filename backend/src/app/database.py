@@ -2,6 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+from .common.sample_contents import sample_contents_query
+
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 
 engine = create_engine(
@@ -21,9 +23,10 @@ def initialize_db():
         conn.execute(
             """
             INSERT INTO channels(hashed_id, thumbnail_url, name)
-            VALUES ('faked_id', 'google.com', 'root')
+            VALUES ('faked_id', 'google.com', 'root');
         """
         )
+        conn.execute(sample_contents_query)
 
 
 # Dependency
